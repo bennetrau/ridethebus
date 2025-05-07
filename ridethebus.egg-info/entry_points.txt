@@ -1,2 +1,2 @@
 [console_scripts]
-ridethebus = main:main
+ridethebus = game.main:main

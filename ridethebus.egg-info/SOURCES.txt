@@ -1,4 +1,9 @@
 setup.py
+game/__init__.py
+game/deck.py
+game/game.py
+game/main.py
+game/player.py
 ridethebus.egg-info/PKG-INFO
 ridethebus.egg-info/SOURCES.txt
 ridethebus.egg-info/dependency_links.txt
