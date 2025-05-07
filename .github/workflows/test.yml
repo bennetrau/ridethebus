@@ -53,11 +53,17 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
 
-    - name: Upload release to GitHub
-      if: startsWith(github.ref, 'refs/tags/v')  # only on tags
+    - name: Upload to GitHub Release (on tag only)
+      if: startsWith(github.ref, 'refs/tags/v')
       uses: softprops/action-gh-release@v1
       with:
         files: |
           dist/*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload .whl as artifact (always)
+      uses: actions/upload-artifact@v3
+      with:
+        name: latest-whl
+        path: dist/*.whl
