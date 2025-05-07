@@ -3,14 +3,39 @@ name: Test, Build, Deploy
 on:
   push:
     tags:
-      - 'v*' 
+      - 'v*'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install test dependencies
+      run: |
+        pip install coverage
+
+    - name: Run tests and check coverage
+      run: |
+        coverage run -m unittest discover -s tests
+        coverage report --fail-under=75
+
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
 
     - name: Set up Python
       uses: actions/setup-python@v4
