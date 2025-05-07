@@ -2,7 +2,7 @@ from game.game import RideTheBus
 
 
 def main():
-    print("Ride the Bus the game!... v1.0.0\n")
+    print("Ride the Bus the game!... v1.2\n")
 
     while True:
         play_game()
