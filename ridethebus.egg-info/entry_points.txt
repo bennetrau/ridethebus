@@ -1,0 +1,2 @@
+[console_scripts]
+ridethebus = main:main
